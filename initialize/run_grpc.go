@@ -12,7 +12,7 @@ import (
 )
 
 func runGRPC() {
-	listenGRPC, err := net.Listen("tcp", fmt.Sprintf(":%s", connection.GetConnect().QuizzService.Port))
+	listenGRPC, err := net.Listen("tcp", fmt.Sprintf(":%s", connection.GetConnect().QuizzService.Grpc))
 	if err != nil {
 		log.Println("Error start quizz server grpc: ", err)
 		return

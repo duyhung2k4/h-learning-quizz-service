@@ -1,8 +1,10 @@
 package grpchandle
 
 import (
+	"app/generated/grpc/enumgrpc"
 	"app/generated/grpc/servicegrpc"
 	"app/generated/grpc/sharedgrpc"
+	"app/internal/apperrors"
 	constant "app/internal/constants"
 	"app/internal/entity"
 	logapp "app/pkg/log"
@@ -10,15 +12,19 @@ import (
 )
 
 func (h *grpcHandle) CreateQuizz(ctx context.Context, req *servicegrpc.CreateQuizzRequest) (*sharedgrpc.ID, error) {
+	if req.ResultType == enumgrpc.ResultType_QUIZZ_SINGLE_RESULT &&
+		len(req.Result) != 1 {
+		return nil, apperrors.ErrorSingleQuizzHaveMoreResult
+	}
 
 	newQuizz, err := h.service.QueryQuizzService.Create(entity.Quizz{
-		Ask:    req.Quizz.Ask,
-		Result: req.Quizz.Result,
-		Option: req.Quizz.Option,
-		Time:   int(req.Quizz.Time),
-
-		EntityType: entity.ENTITY_TYPE(req.Quizz.EntityType.String()),
-		EntityId:   uint(req.Quizz.EntityId),
+		Ask:        req.Ask,
+		Time:       int(req.Time),
+		Option:     req.Option,
+		ResultType: entity.RESULT_TYPE(req.ResultType.String()),
+		Result:     req.Result,
+		EntityType: entity.ENTITY_TYPE(req.EntityType.String()),
+		EntityId:   uint(req.EntityId),
 	})
 
 	if err != nil {
