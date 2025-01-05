@@ -2,7 +2,7 @@ package initialize
 
 import (
 	grpchandle "app/cmd/quizz-service/delivery/grpc"
-	"app/generated/grpc/servicegrpc"
+	"app/generated/proto/servicegrpc"
 	"app/internal/connection"
 	"fmt"
 	"log"

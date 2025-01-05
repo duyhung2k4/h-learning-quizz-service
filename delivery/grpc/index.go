@@ -2,7 +2,7 @@ package grpchandle
 
 import (
 	"app/cmd/quizz-service/service"
-	"app/generated/grpc/servicegrpc"
+	"app/generated/proto/servicegrpc"
 )
 
 type grpcHandle struct {

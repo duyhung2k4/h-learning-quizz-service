@@ -1,8 +1,8 @@
 package grpchandle
 
 import (
-	"app/generated/grpc/enumgrpc"
-	"app/generated/grpc/servicegrpc"
+	"app/generated/proto/enumgrpc"
+	"app/generated/proto/servicegrpc"
 	constant "app/internal/constants"
 	requestdata "app/internal/dto/client"
 	"app/internal/entity"
